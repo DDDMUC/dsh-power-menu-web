@@ -5,6 +5,13 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-11-01
+
+### Fixed
+
+- **`enable.sh` 默认 profile 改成 `web`**，并支持 `DSH_PROFILE_ROOT` / 覆盖 `HOME` 定位 profile。原来写死 `$HOME/.dsh/profiles`，而 `dsh web` 的部署常把 `HOME` 指到别处（如 `~/fish2`），脚本会去一个不存在的位置找 `package.json`，报「找不到」却不说该往哪儿找。
+- `enable.sh` 的可用 profile 列表之前打印不出来（重定向顺序写成 `2>/dev/null >&2`，stdout 被一起送进 `/dev/null`）。
+
 ## [0.1.0] - 2026-11-01
 
 首个版本。从 `dsh-power-menu-mac` 0.1.4 拆出来，去掉桌面版那半边，只做 `dsh web`。

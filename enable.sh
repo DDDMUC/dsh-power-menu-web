@@ -1,5 +1,5 @@
 #!/bin/sh
-# dsh-power-menu-web 一键启用脚本（macOS）
+# dsh-power-menu-web 一键启用脚本（macOS / Linux）
 #
 # 用途：DSH 插件管理器安装后只写 dependencies，不一定会把插件加进
 # `dsh.profile.bundles`；少了这一条，宿主半不加载，点按钮就会 HTTP 404。
@@ -7,10 +7,12 @@
 # 写之前备份 profile 的 package.json。
 #
 # 用法：
-#   ./enable.sh              # 默认 desktop profile
+#   ./enable.sh              # 默认 web profile
 #   ./enable.sh web          # 指定 profile
+#   HOME=~/fish2 ./enable.sh web   # 部署改过 HOME（profile 在 ~/fish2/.dsh 下）
+#   DSH_PROFILE_ROOT=/srv/dsh/.dsh/profiles ./enable.sh web   # 显式指定根目录
 #
-# 然后重启 DSH。
+# 然后重启宿主。
 #
 # 实现说明：原版（PowerShell）用正则往 JSON 文本里插一段字符串，只为了保留
 # 原文件排版。macOS 这边直接用 node 或 python3 解析再写回 —— 同样的 2 空格
@@ -18,14 +20,18 @@
 
 set -eu
 
-PROFILE="${1:-desktop}"
+PROFILE="${1:-web}"
 PLUGIN="dsh-power-menu-web"
-PKG="$HOME/.dsh/profiles/$PROFILE/package.json"
+# 部署常把 HOME 指到别处（例如 ~/fish2），而 profile 跟着那个 HOME 走。
+# 所以既认 DSH_PROFILE_ROOT，也允许调用方直接覆盖 HOME。
+ROOT="${DSH_PROFILE_ROOT:-$HOME/.dsh/profiles}"
+PKG="$ROOT/$PROFILE/package.json"
 
 if [ ! -f "$PKG" ]; then
   echo "找不到 DSH profile 的 package.json：$PKG" >&2
   echo "可用的 profile：" >&2
-  ls -1 "$HOME/.dsh/profiles" 2>/dev/null >&2 || echo "  （~/.dsh/profiles 不存在）" >&2
+  ls -1 "$ROOT" 1>&2 2>/dev/null || echo "  （$ROOT 不存在）" >&2
+  echo "如果这个部署改过 HOME，用 HOME=<那个目录> 或 DSH_PROFILE_ROOT=<.../.dsh/profiles> 再试。" >&2
   exit 1
 fi
 

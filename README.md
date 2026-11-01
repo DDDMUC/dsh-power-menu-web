@@ -28,12 +28,19 @@
 ## 装
 
 ```sh
-# 在 profile 里装（profile 名默认 web）
-npm i dsh-power-menu-web        # 或在插件管理页里装
-./enable.sh web                 # 补进 dsh.profile.bundles，然后重启宿主
+npm i dsh-power-menu-web          # 或在插件管理页里装
+node_modules/dsh-power-menu-web/enable.sh web   # 补进 dsh.profile.bundles，然后重启宿主
 ```
 
 `enable.sh` 只做一件事：把 `dsh-power-menu-web` 补进指定 profile 的 `dsh.profile.bundles`（写之前备份 `package.json`）。少了这一步宿主半不会加载，点按钮就是 404。
+
+**profile 不在 `~/.dsh` 下的话**（部署把 `HOME` 指到别处，比如 `~/fish2`）：
+
+```sh
+HOME=~/fish2 node_modules/dsh-power-menu-web/enable.sh web
+# 或
+DSH_PROFILE_ROOT=~/fish2/.dsh/profiles node_modules/dsh-power-menu-web/enable.sh web
+```
 
 ## 四项
 
