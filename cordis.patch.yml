@@ -1,0 +1,7 @@
+# dsh-power-menu-web：bundle patch 层。
+# 安装到 profile 后，这一行把插件挂进组合配置。
+#
+# 这个包只服务 `dsh web` 部署；桌面版用 dsh-power-menu-mac / dsh-power-menu-win。
+- insert:
+    - id: dsh-power-menu-web
+      name: dsh-power-menu-web

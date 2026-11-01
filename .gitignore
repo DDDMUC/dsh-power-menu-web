@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+*.tgz
+SHA256SUMS.txt
+
+# local logs / handoff files
+*.log
+*.tmp
+
+# editor / OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# local env / secrets
+.env
+.env.*
