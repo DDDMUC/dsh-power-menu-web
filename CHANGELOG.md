@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-11-03
+
+### Changed
+
+- **`Failed to fetch` 现在会说清是哪一半断了。** 浏览器只在"请求根本没到服务器"时才抛这句话——没有状态码、没有响应体，什么线索都没有。现在失败后会拿同源的 `GET /api/dsh-power-menu-web/health` 再探一次，把结论直接写进提示：
+  - GET 通 → 「同源 GET 正常，只有这次 POST 没到服务器：检查浏览器扩展或代理对 POST 的拦截」，并带上页面 origin；
+  - GET 也不通 → 「这个页面连不上后端（origin）。它可能不是当前实例打开的——重新打开地址栏里的链接再试」。
+- 提示停留时间从 7 秒延长到 12 秒（内容变多了，得留时间读）。
+
+### 背景
+
+实测踩到的情形：页面是从**远程中继**（`<instance>.dsh-market.com`）打开的，而电源接口只挂在本地 web 服务器上，中继上游那台根本没有这些路由——请求在浏览器侧就失败了，插件日志一行都不会有。这种情况下按钮永远点不通（而且 `trusted()` 只认 loopback 的 Host/Origin，本来也拒），提示里那句 origin 就是给人看这个的。
+
 ## [0.1.1] - 2026-11-01
 
 ### Fixed

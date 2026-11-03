@@ -1,6 +1,6 @@
 {
   "name": "dsh-power-menu-web",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "给 dsh web 部署加一个右上角电源按钮：刷新 / 重启 / 定时 / 关闭。重启后自动把新 token 的链接打开——dsh web 每次启动都换 token，不打开就得自己去日志里翻。macOS 走 launchd、Linux 走 systemd、其它平台自己 respawn。",
   "type": "module",
   "main": "lib/index.js",
