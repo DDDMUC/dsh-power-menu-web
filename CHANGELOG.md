@@ -5,6 +5,13 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **去掉常驻横幅**（0.1.5 刚加的）：它太吵，而且不是必要手段。改成**按下刷新快捷键的那一刻按需检查**——`Cmd/Ctrl+R`、`F5` 会先比一次 bundle 版本，有变化就弹确认框，没变化照常刷新。这样反而更准：不再有"最多 30 秒"的空窗，也不需要在界面上常驻一条警告。
+- `beforeunload` 保留：菜单栏、地址栏、右键菜单触发的刷新接不到 keydown，只能靠它兜底。
+
 ## [0.1.3] - 2026-11-04
 
 ### Added
