@@ -1,5 +1,16 @@
 # dsh-power-menu-web
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/dsh-power-menu-web"><img alt="npm version" src="https://img.shields.io/npm/v/dsh-power-menu-web?color=4d6bfe"></a>
+  <a href="https://www.npmjs.com/package/dsh-power-menu-web"><img alt="npm downloads" src="https://img.shields.io/npm/dw/dsh-power-menu-web"></a>
+  <a href="https://github.com/DDDMUC/dsh-power-menu-web/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/DDDMUC/dsh-power-menu-web?color=eac54f"></a>
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/npm/l/dsh-power-menu-web"></a>
+</p>
+
+> ⭐ **如果这个项目对你有帮助，欢迎点个 Star 支持一下。**
+>
+> ⭐ **If you find this project useful, a star is appreciated.**
+
 给 **`dsh web` 部署**加一个右上角电源按钮：**刷新 / 重启 / 定时 / 关闭**。
 
 > 只服务 `dsh web`（浏览器界面）。桌面版请用 [dsh-power-menu-mac](https://github.com/DDDMUC/dsh-power-menu-mac) 或 [dsh-power-menu-win](https://github.com/DDDMUC/dsh-power-menu-win)。
