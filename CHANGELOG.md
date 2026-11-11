@@ -5,6 +5,14 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-11-12
+
+### Changed
+
+- **收紧 helper 的固定等待**：`lib/index.js` 写进 handoff 的 `delayMs` 从 1200ms 降到 300ms；本机回环端口探测超时从 1200ms 降到 600ms；等日志里出现新 URL 的轮询从 400ms 降到 250ms。`WEB_URL_TIMEOUT_MS` 仍是 90 秒——宿主重新加载整组插件要十几秒，这一段不属于插件。
+- **README / About 把「重启后自动打开新 token 的链接」提到最前面作为第一卖点**，并说明 web 版的 cookie 在用户浏览器里、插件碰不到也不需要碰（清理 `dsh-auth-*` 是桌面版的职责）。
+- README 头部加 npm 版本 / 周下载 / GitHub stars / license 四个 badge 和中英双语 Star 提示。
+
 ## [0.1.4] - 2026-11-04
 
 ### Changed
