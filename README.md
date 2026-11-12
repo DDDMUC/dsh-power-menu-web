@@ -11,7 +11,7 @@
 >
 > ⭐ **If you find this project useful, a star is appreciated.**
 
-给 **`dsh web` 部署**加一个右上角电源按钮：**刷新 / 重启 / 定时 / 关闭**。**重启后自动把新 token 的链接直接打开**——`dsh web` 每次启动都生成新 token，浏览器拿它换一次签名 cookie 之后就作废，光把进程杀掉再起来，手上的链接当场失效，只能去日志里翻新的一行。
+给 **`dsh web` 部署**加一个右上角电源按钮：**刷新 / 重启 / 定时 / 关闭**，**鼠标悬停就展开，无需点击**。**重启后自动把新 token 的链接直接打开**——`dsh web` 每次启动都生成新 token，浏览器拿它换一次签名 cookie 之后就作废，光把进程杀掉再起来，手上的链接当场失效，只能去日志里翻新的一行。
 
 > 只服务 `dsh web`（浏览器界面）。桌面版请用 [dsh-power-menu-mac](https://github.com/DDDMUC/dsh-power-menu-mac) 或 [dsh-power-menu-win](https://github.com/DDDMUC/dsh-power-menu-win)。
 
@@ -57,6 +57,7 @@ DSH_PROFILE_ROOT=~/fish2/.dsh/profiles node_modules/dsh-power-menu-web/enable.sh
 
 ## 四项
 
+- **悬停即展开，无需点击**：鼠标移到电源按钮上面板就出现，移开自动收起（按钮和菜单之间留 220ms 过渡，不会一离开就闪没）；点击仍可把焦点交给按钮，接着用 `↑` / `↓` / `Enter` 操作。弹窗或执行遮罩期间不会误展开。
 - **刷新**：只重载这一层页面。**点之前会先比对插件文件**：某个 `client.js` 在你打开页面之后被改过时，刷新会让它加载失败（DSH 的 bundle 按 revision 发布且不可变），这时会弹框列出改动的插件，建议改走重启。
 - **重启**：见上表。新链接会自动在浏览器打开。
 - **定时**：居中弹窗，填分钟数后可选「N 分钟后重启」「N 分钟后关闭」。有 supervisor 时「现在关闭，N 分钟后启动」会收起（杀掉会被立刻拉回来，自己再 spawn 会抢端口）。排定后按钮下方出现每秒跳的倒计时胶囊。
