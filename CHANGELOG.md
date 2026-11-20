@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2026-11-20
+
+### Added
+
+- **新增「等 AI 空闲后关闭 / 重启」**：定时弹窗里新增两行动作，和原来的三行同一套样式；不绑定分钟数，点了就立刻开始等。helper 通过 host 的 `/health` 查 `runningAgents`；还有 running 的 AI 就每秒轮询，连续两次为 0 才继续。等待期间胶囊显示还有几个 AI 在跑，点 × 可取消。
+
+### Fixed
+
+- **重启不再被 30 秒看门狗误判**：helper 退出前写 `<handoff>.result.json`，宿主读标记才决定是否放开闩；只有明确失败才放开。
+- **遮罩不再永久锁死界面**：POST 返回 202 后每 2 秒查 `/health`，失败回写错误并撤遮罩，helper 后来完成也会撤；另加 5 分钟硬上限。
+
 ## [0.2.1] - 2026-11-13
 
 ### Added
