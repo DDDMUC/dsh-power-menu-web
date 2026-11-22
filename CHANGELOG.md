@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.4] - 2026-11-22
+
+### Fixed
+
+- **重启成功不再只看「抓到新链接」**：日志里打出 URL 只证明进程把监听做完了，不证明事件循环还活着。现在抓到地址后会真的请求一次，20 秒内没有应答就报失败并提示检查 `dsh web`（以前会打开一个永远转圈的页面，还记成成功）。
+- **`/health` 加了 2 秒超时**：以前 fetch 没有超时，宿主一卡，遮罩就永远等一个不会来的回答，而 `setInterval` 还会每 2 秒叠一条永远 pending 的请求（实测堆到两百多条连接）。现在连续三次「连得上但不回话」就撤掉遮罩并说清下一步；「连不上」仍然不打扰。
+- **定时动作的 helper 中途死了，定时不会挂在那骗人**：`scheduled` 现在随 helper 退出一起清掉，胶囊不再倒数到 0 后停在「即将执行」。
+- **helper 报成功后闩只多留 60 秒**：正常情况下一秒内本进程就该被杀掉；60 秒后还活着说明这次切换没落到本进程，继续锁着会让之后每个电源动作都回 409。
+- **`readJsonBody` 补上 `aborted` / `close`**：页面中途断开（关闭、刷新）时不再留一个永远 await 的 handler。
+
+### Changed
+
+- **`/bundles` 改成异步 fs 并行读**：这份扫描实测 350–520ms（几十个包，符号链接解析慢），同步版本每刷新一次页面就把单线程宿主按住半秒，agent 的事件循环一起停；改异步后墙钟时间差不多，但这半秒是等待而不是占用。
+
 ## [0.2.3] - 2026-11-20
 
 ### Added
